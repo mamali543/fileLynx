@@ -1,0 +1,19 @@
+<div class="popup-bg">
+
+  <div class="add-professor">
+    <button class="close" routerLink="..">X</button>
+    <div class="add-professor-container">
+        <h2>Ajouter un groupe</h2>
+        <form [formGroup]="addGroupeForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="name">Nom</label>
+            <input type="text" id="nom" formControlName="nom" required />
+          </div>
+          <button type="submit" [disabled]="!addGroupeForm.valid" class="add-button">
+            j'ajoute le groupe
+          </button>
+        </form>
+      </div>
+  </div>
+</div>
+

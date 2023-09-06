@@ -1,0 +1,235 @@
+.dashboard{
+  background: #F6F6F6;
+}
+
+.dashboard-header{
+  background: rgb(247,181,55);
+  background: linear-gradient(120deg, rgba(247,181,55,1) 0%, rgba(249,129,38,1) 100%);
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 0 100px 0 100px;
+  flex-direction: column;
+}
+
+.logs-title{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.logs-title button{
+  background-color: #191716;
+  font-size: 0.9em;
+  font-weight: 300;
+  box-shadow: 0px 4px 4px -4px rgba(245, 89, 3, 0.02),
+  0px 1px 2px rgba(245, 89, 3, 0.06);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 8px;
+  width: 130px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+nav button{
+  font-weight: 500;
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  padding: 5px 15px 5px 15px;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  font-size: 0.9em;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+
+nav button:hover{
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+nav{
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px 0 20px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);;
+}
+
+.header-card{
+  padding: 24px;
+  height: 75vh;
+  /* background-color: white; */
+  background: white;
+  box-shadow: 1px 20px 27px -2px rgba(0,0,0,0.15);
+  -webkit-box-shadow: 1px 20px 27px -2px rgba(0,0,0,0.15);
+  -moz-box-shadow: 1px 20px 27px -2px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.header-card-container{
+  padding-top: 50px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 32px;
+  grid-template-areas:
+    ". .";
+  justify-content: space-evenly;
+  align-content: stretch;
+  justify-items: stretch;
+  align-items: stretch;
+  width: 100%;
+  /* background: #F6F6F6; */
+}
+
+.header-card-title{
+  color : #3C3C3E;
+  font-weight: 500;
+  margin-bottom: 22px;
+}
+
+.quota{
+  font-size: 2.2em;
+  font-weight: 500;
+  color: #FF8400;
+}
+
+.progress{
+  margin-top: 22px;
+  width: 100%;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #E2E2E2;
+}
+
+.progress-value{
+  height: 5px;
+  border-radius: 5px;
+  background-color: #FF8400;
+}
+
+.log-type{
+  display: inline-block;
+  font-size: 0.8em;
+  background-color: #E2E2E2;
+  border-radius: 3px;
+  font-weight: 400;
+  padding: 2px 5px 2px 5px;
+  color: #3C3C3E;
+  width: 70px;
+  text-align: center;
+}
+
+.log-row{
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 6px 0 6px 0;
+  border-bottom: 1px solid #E2E2E2;
+}
+
+.log-row:last-child{
+  border-bottom: none;
+}
+
+.log-message{
+  font-size: 0.9em;
+  color: #3C3C3E;
+  font-weight: 500;
+}
+
+.log{
+  overflow: hidden;
+}
+
+tr.log-row:hover {
+  cursor: pointer;
+}
+
+.popup {
+  width: 500px;
+  background: white;
+  border-radius: 6px;
+  border: 2px solid rgba(25,23,22, 0.2); /* Add this line to set the border color and width */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+}
+
+.popup.open-popup {
+  border-radius: 10px;
+  border: 2px solid rgb(25,23,22); /* Add this line to set the border color and width */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  text-align: center;
+  visibility: visible;
+  transition: transform 0.7s, top 1s;
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.popup.open-popup h2 {
+  margin: 20px 0;
+}
+
+.popup.open-popup p {
+  margin: 10px 0;
+}
+
+.popup.open-popup button {
+  background-color: #191716;
+  color: white;
+  width: 100px;
+  margin-bottom: 12px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  padding: 7px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  box-shadow: 0px 4px 4px -4px rgba(245, 89, 3, 0.02),
+    0px 1px 2px rgba(245, 89, 3, 0.06);
+}
+
+.blue-background {
+  background-color: rgb(201, 226, 245);
+}
+
+.green-background {
+  background-color: rgb(170, 237, 198);
+}
+
+.red-background {
+  background-color: rgb(235, 118, 118);
+}
+
+.add-button{
+  background-color: black;
+  padding: 0px 8px 0px 8px;
+  color: white;
+  font-weight: 500;
+  border-radius: 3px;
+  border: none;
+  height: 30px;
+}
+
+.header-card-wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

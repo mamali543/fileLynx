@@ -1,0 +1,61 @@
+<div class="popup-bg" >
+    <div class="popup-content">
+      <button class="close" routerLink="../..">X</button>
+      <h3>Charger un fichier</h3>
+      <div class="row1">
+        <div class="left-side">
+          <div class="label-container">
+              <label for="name">Fichier</label>
+              <div class="test">
+                <!-- <button class="Vector"> <img src="../../../assets/Vector.svg" alt=""> </button> -->
+                <input type="file" class="file-input" id="file-input" (change)="onFileSelected($event)">
+                <label for="file-input">
+                  <img src="../../../assets/Vector.svg" alt="">
+                </label>
+                <input class="ttt" type="text" [(ngModel)]="selectedFileNameWithoutExtension" (input)="onFileNameChanged($event)">
+                  <span>{{extension}}</span>
+              </div>
+          </div>
+          <div class="label-container">
+              <label for="name">Categorie</label>
+              <div class="row">
+                <select class="sele" (change)="onCategorieSelected($event)" >
+                  <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
+                </select>
+              </div>
+          </div>
+          <div class="label-container hhhh">
+            <label for="name">Étiquettes</label>
+            <div class="row">
+              <select class="sele" (change)="onLabelSelected($event)">
+                <option value="">Selectionnez un label</option>
+                <option *ngFor="let label of labels" [value]="label">{{ label }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="label-container">
+            <label for="name">Groupe</label>
+            <div class="rectangle"><p>{{groupe}}</p></div>
+          </div>
+          <div class="label-container">
+            <label for="name">Taille</label>
+            <div class="rectangleb"><span>{{size}}</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="row2">
+        <div class="left-side">
+          <div *ngFor="let label of selectedLabels" class="selected-label">
+            {{ label }}
+            <img (click)="removeLabel(label)" src="../../../assets/close.svg" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="row3">
+        <button class="annuler" routerLink=".." >annuler</button>
+        <button class="charger" id="uploadButton" (click)="onUpload()" >charger</button>
+      </div>
+    </div>
+  </div>

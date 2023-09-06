@@ -1,0 +1,62 @@
+  <div class="popup-bg" >
+    <div class="popup-content">
+      <button class="close" routerLink="../">X</button>
+      <h3>Paramètres de dossier</h3>
+      <div class="row1">
+        <div class="left-side">
+          <div class="label-container">
+              <label for="name">Nom</label>
+              <div class="rectangle">
+                <p class="fullpath">{{dossier.nom}}</p>
+              </div>
+          </div>
+          <div class="label-container" *ngIf="roles[0] == 'ROLE_COMPAGNIE'">
+              <label for="name">Collaborateur</label>
+              <div class="row" >
+                <select class="sele" (change)="onUserSelected($event)">
+                  <option value="" *ngFor="let membre of membres" [value]="membre.id">{{membre.username}}</option>
+                </select>
+                <button [routerLink]="'add-collab/'+folderId" >+</button>
+              </div>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="label-container">
+            <label for="name">Emplacement</label>
+            <div class="rectangle"><p class="fullpath">{{dossier.fullPath}}</p></div>
+          </div>
+          <div class="label-container">
+            <label for="name">Groupe</label>
+            <div class="row">
+              <select class="sele" disabled>
+                <option value="">{{groupe.nom}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row2" *ngIf="roles[0] == 'ROLE_COMPAGNIE'">
+        <div class="left-side">
+          <div class="checkbox-container">
+            <div *ngFor="let checkbox of checkboxeUser" class="checkbox-item">
+              <input type="checkbox" [id]="'checkbox-' + checkbox.id" [name]="'checkbox-' + checkbox.id" [(ngModel)]="checkbox.checked" (change)="onUserAuthChange($event)">
+              <label [for]="'checkbox-' + checkbox.id">{{ checkbox.description }}</label>
+            </div>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="checkbox-container">
+            <div *ngFor="let checkbox of checkboxeGroupe" class="checkbox-item">
+              <input type="checkbox" [id]="'checkbox-' + checkbox.id" [name]="'checkbox-' + checkbox.id" [(ngModel)]="checkbox.checked" (change)="onGroupeAuthChange($event)">
+              <label [for]="'checkbox-' + checkbox.id">{{ checkbox.description }}</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row3">
+        <button class="annuler" routerLink=".." >annuler</button>
+        <button class="enregistrer">Enregistrer</button>
+      </div>
+    </div>
+  </div>
+<router-outlet></router-outlet>

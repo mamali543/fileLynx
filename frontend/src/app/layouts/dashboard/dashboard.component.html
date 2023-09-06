@@ -1,0 +1,129 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <nav>
+      <button>Tableau de bord</button>
+      <button routerLink="/files">Fichiers/Dossiers</button>
+      <button routerLink="/users">Collaborateurs</button>
+      <button routerLink="/groups">Groupes</button>
+      <button routerLink="/metadata">Métadonnées</button>
+      <div class="compagnie-name">
+        <div class="compagnie-avatar">{{compagnieName.name[0]|titlecase}}</div>
+        <p class="compagnie-identity">{{compagnieName.name}}</p>
+      </div>
+    </nav>
+    <div class="dashboard-container">
+      <div class="header-card-container">
+        <div class="header-card">
+          <p class="header-card-title">Quota</p>
+          <span class="quota">{{tailleToUnit(quota.usedQuota,false,"Go",2)}} / {{tailleToUnit(quota.quota,true,"Go",2)}}</span>
+          <div class="progress">
+            <div class="progress-value red" [style.width.%]="(totalAllocatedQuota/quota.quota)*100">
+
+            </div>
+            <div class="progress-value relative" [style.width.%]="(quota.usedQuota/quota.quota)*100"></div>
+          </div>
+          <div class="group-allocated">
+            {{ tailleToBestUnit(totalAllocatedQuota,  true, 2)}} alloué à {{entitiesCount.groupes}} groupe{{entitiesCount.groupes>1?"s":""}} ({{(totalAllocatedQuota/quota.quota)*100}}%)
+          </div>
+          <div class="uploaded-today">
+            {{ tailleToBestUnit(quotaUsedToday.quotaUsedToday,  true, 2)}} chargé aujourd'hui ({{quotaUsedToday.fileCount}} fichiers)
+          </div>
+        </div>
+        <div class="header-card">
+          <div class="logs-title">
+            <p class="header-card-title">Logs</p>
+            <button routerLink="/log" > Afficher Tout</button>
+          </div>
+          <table class="log">
+            <tr *ngFor="let log of logs.reverse()" class="log-row" (click)="openPopup(log)">
+              <td><span class="log-type" [ngClass]="getLogType(log.type)">{{log.type.length>6?log.type.slice(0,6)+"..":log.type}} </span></td>
+              <td class="log-message">{{log.message.length>30?log.message.slice(0,25)+"...":log.message}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="secondRow-container">
+        <div class="secondRow-card">
+          <div class="secondRow-card-icon">
+            <img src="../../../assets/folder.256x204.png" alt="" class="secondRow-card-icon-img">
+          </div>
+          <div class="secondRow-card-content">
+            <div class="secondRow-card-content-value">{{entitiesCount.dossiers-1}}</div>
+            <div class="secondRow-card-content-label">Dossiers</div>
+          </div>
+        </div>
+        <div class="secondRow-card highlighted">
+          <div class="secondRow-card-icon">
+            <img src="../../../assets/document.195x256.png" alt="" class="secondRow-card-icon-img">
+          </div>
+          <div class="secondRow-card-content">
+            <div class="secondRow-card-content-value">{{entitiesCount.fichiers}}</div>
+            <div class="secondRow-card-content-label">Fichiers</div>
+          </div>
+        </div>
+        <div class="secondRow-card">
+          <div class="secondRow-card-icon">
+            <img src="../../../assets/contacts.230x256.png" alt="" class="secondRow-card-icon-img">
+          </div>
+          <div class="secondRow-card-content">
+            <div class="secondRow-card-content-value">{{entitiesCount.groupes}}</div>
+            <div class="secondRow-card-content-label">Groupes</div>
+          </div>
+        </div>
+        <div class="secondRow-card">
+          <div class="secondRow-card-icon">
+            <img src="../../../assets/manager.204x256.png" alt="" class="secondRow-card-icon-img">
+          </div>
+          <div class="secondRow-card-content">
+            <div class="secondRow-card-content-value">{{entitiesCount.membres}}</div>
+            <div class="secondRow-card-content-label">Collaborateurs</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="secondRow-card orange">
+          <div class="OrangIcon">
+            ?
+          </div>
+          <div>Vous avez {{entitiesCount.categories}} categories et {{entitiesCount.labels}} étiquettes</div>
+        </div>
+      </div>
+      <div class="bottom-card-container">
+        <div class="secondRow-card last">
+          <p class="header-card-title">Consomation par groupe</p><br>
+          <canvas id="GroupeAllocationChart">{{GroupeAllocationChart}}</canvas>
+        </div>
+        <div class="secondRow-card last">
+          <p class="header-card-title">Consomation par jour</p><br>
+          <canvas id="consumptionHistoryChart">{{consumptionHistoryChart}}</canvas>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<!-- Custum Modal -->
+<div class="black-bg" *ngIf="showModal">
+  <div class="popup" [class]="popupClass" [ngClass]="popupBackgroundColor" >
+    <div class="modal-content">
+      <button class="close" (click)="hideModal()" >X</button>
+      <div class="popup-header">
+        <div class="type" [ngStyle]="{'background-color': getLogTypeColor(selectedLog.type)}">{{selectedLog.type}}</div>
+        <div class="date">{{ selectedLog.date.toString().slice(0,10)}}</div>
+      </div>
+      <div class="log-trigger">
+        <div class="declencheur">Déclencheur : </div>
+        <div class="value">{{ selectedLog.trigger.nom.charAt(0).toUpperCase() + selectedLog.trigger.nom.slice(1) }}</div>
+      </div>
+      <div class="popup-message">
+        <div class="message">
+          {{selectedLog.message}}
+        </div>
+      </div>
+      <!-- <button (click)="hideModal()">Close</button> -->
+    </div>
+  </div>
+
+</div>

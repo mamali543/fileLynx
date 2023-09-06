@@ -1,0 +1,161 @@
+input {
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #c6ced6;
+  width: 326px;
+  padding: 13px;
+  outline: none;
+  font-size: 0.9em;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 326px;
+  margin: auto;
+}
+
+button {
+  background-color: #191716;
+  font-size: 0.9em;
+  font-weight: 500;
+  box-shadow: 0px 4px 4px -4px rgba(245, 89, 3, 0.02),
+    0px 1px 2px rgba(245, 89, 3, 0.06);
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 15px;
+  width: 330px;
+  cursor: pointer;
+}
+
+.alert {
+  color: red;
+  padding-top: 8px;
+  font-size: 0.8em;
+}
+
+label {
+  font-style: normal;
+  font-weight: 380;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.1px;
+  margin-bottom: 3px;
+  color: #656463;
+}
+
+.form-group,
+button {
+  margin-bottom: 30px;
+
+}
+
+.login-title {
+  width: 326px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 25px;
+  margin-bottom: 35px;
+  text-align: center;
+  color: #656463;
+  
+}
+
+.login-wrapper {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  width: 100%;
+  background: #F6F6F6;
+}
+
+.decoration {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: #191716;
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.decoration img{
+  width: 322px;
+  height: 400px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.logo {
+  margin-top: 100px;
+  margin-bottom: 35px;
+  width: 250px;
+  align-self: center;
+  cursor: pointer;
+}
+
+.centered {
+  text-align: center;
+}
+
+.success{
+    /* color: lime; */
+    color: #191716;
+    font-size: 1em;
+    text-align: center;
+}
+
+#sign-in{
+    text-decoration: none;
+    /* color: lime; */
+    color: #7e4a30;
+}
+
+a{
+    color: #935266;
+    text-decoration: none;
+}
+
+.question{
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.two-inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.two-inputs .left input {
+  left: 0;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #c6ced6;
+  width: 155px;
+  padding: 13px;
+  outline: none;
+  font-size: 0.9em;
+  margin-right: 12px;
+}
+
+.two-inputs .right input {
+  right: 0;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #c6ced6;
+  width: 160px;
+  padding: 13px;
+  outline: none;
+  font-size: 0.9em;
+}
+
+.required {
+  color: red;
+}

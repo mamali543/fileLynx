@@ -1,0 +1,52 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <nav>
+      <button routerLink="/user-files">Fichiers/Dossiers</button>
+    </nav>
+    <div class="header-card-container">
+      <div class="header-card">
+        <div class="fileExplorer-heading">
+          <h2 class="fullPath"><img src="../../../assets/folder.256x204.png" alt="" class="folder-icon-title" style="width:14px"> Résultat</h2>
+          <div class="buttons">
+            <h3 routerLink="/userdashboard" class="return-btn">Retour</h3>
+          </div>
+        </div>
+        <div class="explorer">
+          <div *ngIf="files.length==0" class="folder-empty">
+            <img src="../../../assets/high-priority.256x256.png" class="folder-icon" alt="">
+            <p>Aucun Résultat trouvé</p>
+          </div>
+          <div *ngFor="let fichier of files" class="file-or-folder">
+            <!-- Code for displaying the files -->
+            <div (click)="onFileClick(fichier)">
+              <img [src]="'../../../assets/extensions/new/'+fichier.extension+'.png'" alt="" class="file-icon" class="folder-icon-title">
+              <p>{{(fichier.nom+"."+fichier.extension).slice(0,23)+((fichier.nom+"."+fichier.extension).length>=23?"...":"")}}</p>
+            </div>
+            <div class="file-button-collection">
+              <div class="settings-button" *ngIf="fichier?.currentAuth?.telechargement">
+                <img class="settings-icon"  src="../../../assets/apps.png" alt="" (click)="onDownload(fichier)">
+              </div>
+              <div class="settings-button" *ngIf="fichier?.currentAuth?.modification">
+                <img class="settings-icon"  src="../../../assets/services.240x256.png" alt="" [routerLink]="['/userdashboard/filedetails', fichier?.id]">
+              </div>
+              <div class="settings-button" *ngIf="fichier?.currentAuth?.suppression">
+                <img class="settings-icon"  src="../../../assets/full-trash.194x256.png" alt="" (click)="deleteFilePopup(fichier)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>
+  <!-- Custum Modal -->
+  <div class="popup" [class]="popupClass"  *ngIf="showModal">
+    <div class="modal-content">
+
+      <button (click)="hideModal()">fermer</button>
+      <!-- <button (click)="hideModal()">Supprimer</button> -->
+    </div>
+  </div>
+  <!-- <div class="overlay" *ngIf="showModal"></div> -->
+  <router-outlet></router-outlet>
+

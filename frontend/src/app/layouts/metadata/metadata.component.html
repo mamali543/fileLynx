@@ -1,0 +1,30 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <nav>
+      <button routerLink="/dashboard">Tableau de bord</button>
+      <button routerLink="/files">Fichiers/Dossiers</button>
+      <button routerLink="/users">Collaborateurs</button>
+      <button routerLink="/groups">Groupes</button>
+      <button routerLink="/metadata">Métadonnées</button>
+    </nav>
+    <div class="header-card-container">
+      <div class="header-card">
+        <div class="header-card-wrapper">
+
+        </div>
+        <app-category-list></app-category-list>
+      </div>
+      <div class="header-card">
+        <div class="header-card-wrapper">
+
+        </div>
+        <app-label-list></app-label-list>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<router-outlet></router-outlet>

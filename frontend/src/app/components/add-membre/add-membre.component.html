@@ -1,0 +1,46 @@
+
+<div class="popup-bg">
+    <div class="add-professor">
+      <button class="close" routerLink="..">X</button>
+      <div class="add-professor-container">
+          <h2>Ajouter un membre</h2>
+          <form [formGroup]="addMemberForm" (ngSubmit)="onSubmit()">
+            <div>
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" formControlName="username" required />
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input type="email" id="email" formControlName="email" required />
+            </div>
+            <div>
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" formControlName="nom" required />
+            </div>
+            <div>
+                <label for="prenom">Prénom</label>
+                <input type="text" id="prenom" formControlName="prenom" required />
+            </div>
+            <div *ngIf="groupes">
+              <label for="groupe">Groupe</label>
+              <select id="groupe" formControlName="groupe" required>
+                <option value="">Groupes</option>
+                  <option *ngFor="let groupe of groupes" [value]="groupe">{{ groupe }}</option>
+              </select>
+          </div>
+            <div>
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" formControlName="password" minlength="6" required />
+                <div *ngIf="addMemberForm.get('password')?.invalid && (addMemberForm.get('password')?.dirty || addMemberForm.get('password')?.touched)">
+                  <div *ngIf="addMemberForm.get('password')?.errors?.['minlength']">
+                    Le mot de passe doit contenir au moins 6 caractères
+                  </div>
+                </div>
+              </div>
+            <button type="submit" [disabled]="!addMemberForm.valid" class="add-button">
+              j'ajoute le membre
+            </button>
+          </form>
+        </div>
+    </div>
+  </div>

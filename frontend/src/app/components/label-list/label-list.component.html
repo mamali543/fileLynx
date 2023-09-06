@@ -1,0 +1,40 @@
+
+<h2>Liste des étiquete</h2>
+<div class="professors-list-container">
+    <div class="filters">
+        <input [(ngModel)]="searchValue" (input)="onSearch()" placeholder="Recherche par Nom" />
+        <button routerLink="add-label" class="add-prof">+ Ajouter étiquete</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let label of filteredLabels">
+                <td>
+                    <div class="name-info">
+                        <button class="info">?</button>
+                        <input class="table-data" [(ngModel)]="label.nom" [ngModelOptions]="{ updateOn: 'blur' }" [value]="label.nom | titlecase"/>
+                    </div>
+                </td>
+                <td class="actions">
+                    <button (click)="onUpdateLabel(label.id, label.nom)" class="edit">Modifier</button>
+                    <button (click)="onDeleteLabel(label.id)" class="delete">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="page === 0" class="pagination-button">&laquo;</button>
+        <span class="current-page">{{ page + 1 }}</span>
+        <button
+            class="pagination-button"
+            (click)="nextPage()"
+            [disabled]="(page + 1) * pageSize >= totalLabels"
+        >&raquo;
+        </button>
+    </div>
+</div>
+<router-outlet></router-outlet>

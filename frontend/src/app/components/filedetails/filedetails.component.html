@@ -1,0 +1,64 @@
+
+<div class="popup-bg" >
+    <div class="popup-content">
+      <button class="close" routerLink="../..">X</button>
+      <div class="left-side" id="left-side" [ngStyle]="{'backgroundImage':'url('+imageUrl+')'}" *ngIf="isImage()">
+        <!-- <img src="../../../assets/left-side.png" alt="" class="filePicture"> -->
+      </div>
+      <div class="left-side" id="left-side" *ngIf="!isImage()">
+        {{("."+extension)|uppercase}}
+      </div>
+      <div class="right-side">
+        <div class="label-container">
+            <label for="name">Fichier</label>
+            <div class="file">
+                <input id="fileName" type="text" class="rectangle" value={{fileName}} (change)="onNamechange($event)">
+                <span>.{{extension}}</span>
+            </div>
+        </div>
+        <div class="label-container">
+            <label for="name">Categorie</label>
+            <div class="row">
+              <select class="sele" (change)="onCategorieSelected($event)">
+                <option [value]="categorie">{{categorie}}</option>
+                <option *ngFor="let categorie of categories" [value]="categorie" >{{categorie}}</option>
+              </select>
+            </div>
+        </div>
+        <div class="label-container">
+            <label for="name">Étiquettes</label>
+            <div class="row">
+              <select class="sele" (change)="onLabelSelected($event)" >
+                <option value="">Selectionnez une Étiquette</option>
+                <option *ngFor="let label of labels" [value]="label">{{label}}</option>
+              </select>
+            </div>
+            <div class="row2">
+              <div class="labels">
+                <div *ngFor="let label of selectedLabels" class="selected-label">
+                  {{ label }}
+                  <img (click)="removeLabel(label)" src="../../../assets/close.svg" alt="">
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="label-container">
+            <label for="name">Groupe</label>
+            <div class="rectangleb">
+                <p class="fullpath">{{file.racine.groupe.nom}}</p>
+            </div>
+        </div>
+        <div class="label-container">
+            <label for="name">Taille</label>
+            <div class="rectanglec">
+                <p class="fullpath">{{size}}</p>
+            </div>
+        </div>
+        <div class="row3">
+            <button class="annuler" routerLink="../.." >annuler</button>
+            <button class="enregistrer" (click)="onSave()" >enregistrer</button>
+          </div>
+      </div>
+    </div>
+  </div>
+<router-outlet></router-outlet>

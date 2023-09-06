@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "1d3f2ad5-d7a4-44d6-92a9-d718bcf46267",
+		"name": "Folder",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "21632138"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"omnishore\",\n    \"email\": \"omnishore@gmail.com\",\n    \"password\": \"redareda\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/auth/signup"
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"acces-token\", pm.response.json().token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSZWRhIiwiaWF0IjoxNjg1MTEzMTMzLCJleHAiOjE2ODUxMTY3MzN9.g-pKmC_FJuOUB-CRa87K0C5jIcN7_gWfElma60mr3n7epKuIziYe-wD2pKU47I88xvhi7Zy12wZDBh6IMQkL_w"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"omnishore\",\n    \"password\": \"redareda\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/auth/signin"
+			},
+			"response": []
+		},
+		{
+			"name": "AddFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"nom\": \"inOmni\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8080/api/v1/dossier/admin/add/8"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/dossier/admin/delete/13"
+			},
+			"response": []
+		},
+		{
+			"name": "RenameFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "renamedFolder",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/v1/dossier/admin/rename/28"
+			},
+			"response": []
+		},
+		{
+			"name": "ChangerEmplacement",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "targetFolderId",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:8080/api/v1/dossier/admin/changerEmplacement/28"
+			},
+			"response": []
+		},
+		{
+			"name": "GetChildrenFolders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/dossier/admin/getChildrenFolders/5"
+			},
+			"response": []
+		},
+		{
+			"name": "GetFolder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "{{acces-token}}"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:8080/api/v1/dossier/admin/get/28"
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,25 @@
+<div class="popup-bg">
+    <div class="member-setting">
+        <button class="close" routerLink="../..">X</button>
+        <div class="head">
+            <h2>Paramètres de Collaborateur</h2>
+            <div class="status">Active</div>
+        </div>
+        <div class="nom">
+            <p>Nom d'utilisateur <span>{{collaborateur.username}}</span></p>
+        </div>
+        <div class="groupe-line">
+            <label for="groupe">Groupe</label>
+            <select id="groupe" (change)="onSave()" [(ngModel)]="selectedGroupe">
+                <option [value]="collaborateur.groupe.nom">{{collaborateur.groupe.nom}}</option>
+                <option *ngFor="let groupe of groupes" [value]="groupe">{{groupe}}</option>
+            </select>
+        </div>
+
+        <div class="button-line">
+            <button class="reset-password">Réinitialiser le mot de passe</button>
+            <button class="disable-account">Désactiver le compte</button>
+            <!-- <button class="save-button" (click)="onSave()" routerLink="../..">enregistrer</button> -->
+        </div>
+    </div>
+</div>

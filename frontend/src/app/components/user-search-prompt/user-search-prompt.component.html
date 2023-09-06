@@ -1,0 +1,48 @@
+<div class="popup-bg" >
+  <div class="popup-content">
+    <button class="close" routerLink="../..">X</button>
+    <h3>Recherche et filtrage</h3>
+    <div class="row1">
+      <div class="left-side">
+        <div class="label-container">
+          <label for="name">Nom</label>
+          <div class="row">
+              <input class="sele" type="text" class="rectangle" [(ngModel)]="searchText">
+          </div>
+        </div>
+        <div class="label-container">
+            <label for="name">Categorie</label>
+            <div class="row">
+              <select class="sele" (change)="onCategorieSelected($event)" >
+                <option *ngFor="let categorie of categories" [value]="categorie">{{categorie}}</option>
+              </select>
+            </div>
+        </div>
+        <div class="label-container hhhh">
+          <label for="name">Étiquettes</label>
+          <div class="row">
+            <select class="sele" (change)="onLabelSelected($event)">
+              <option value="">Selectionnez un label</option>
+              <option *ngFor="let label of labels" [value]="label">{{ label }}</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row2">
+      <div class="left-side">
+        <div class="labels">
+          <div *ngFor="let label of selectedLabels" class="selected-label">
+          {{ label }}
+          <img (click)="removeLabel(label)" src="../../../assets/close.svg" alt="">
+        </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row3">
+      <button class="annuler" routerLink=".." >annuler</button>
+      <button class="charger" id="uploadButton" (click)="search()">Filtrer</button>
+    </div>
+  </div>
+</div>

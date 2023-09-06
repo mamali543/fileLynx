@@ -1,0 +1,22 @@
+
+<div class="popup-bg">
+
+  <div class="add-professor">
+    <button class="close" routerLink="../../..">X</button>
+    <div class="add-professor-container">
+        <h2>Ajouter un collaborateur</h2>
+        <form [formGroup]="addGroupeForm" (ngSubmit)="onSubmit()">
+          <div>
+            <label for="name">Nom</label>
+            <select name="id" id="id" formControlName="id" required>
+              <option value="" *ngFor="let membre of membersWithoutAuth" [value]="membre.id">{{membre.username}}</option>
+            </select>
+          </div>
+          <button type="submit" [disabled]="!addGroupeForm.valid" class="add-button">
+            j'ajoute le collaborateur
+          </button>
+        </form>
+      </div>
+  </div>
+</div>
+

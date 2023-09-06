@@ -1,0 +1,60 @@
+
+<h2>Liste des groupes</h2>
+<div class="professors-list-container">
+    <div class="filters">
+        <input [(ngModel)]="searchValue" (input)="onSearch()" placeholder="Recherche par Nom" />
+        <select [(ngModel)]="nameOrder" (ngModelChange)="onNameOrderChange($event)">
+            <option value="">Ordre par nom</option>
+            <option value="ASC">Nom A-Z</option>
+            <option value="DESC">Nom Z-A</option>
+        </select>
+        <button routerLink="add-groupe" class="add-prof">+ Ajouter Groupe</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Quota</th>
+                <th>Membres</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let groupe of filteredGroups">
+                <td>
+                    <div class="name-info">
+                        <button (click)="onInfoProfessor(groupe)" class="info">?</button>
+                        <input class="table-data editable" [(ngModel)]="groupe.nom" [ngModelOptions]="{ updateOn: 'blur' }" [value]="groupe.nom | titlecase"/>
+                    </div>
+                </td>
+                <!-- <td>
+                    <input class="table-data" [value]="tailleToUnit(groupe.quota,true,'Go',2)" disabled/>
+                </td> -->
+                <td>
+                  <div class="progressBar table-data">
+                    <div class="progressBarValue" [style.width]="((groupe.quotaUsed/groupe.quota)*100)+'%'"></div>
+                    <div class="progressBarText">{{tailleToBestUnit(groupe.quotaUsed,true,2)}}/{{tailleToBestUnit(groupe.quota,true,2)}}</div>
+                  </div>
+                </td>
+                <td>
+                    <input class="table-data" [(ngModel)]="groupe.membres.length" disabled/>
+                </td>
+                <td class="actions">
+                    <button (click)="onUpdateGroupe(groupe.id,groupe.nom)" class="edit">Modifier</button>
+                    <button (click)="onDeleteGroupe(groupe.nom)" class="delete">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="pagination">
+        <button (click)="prevPage()" [disabled]="page === 0" class="pagination-button">&laquo;</button>
+        <span class="current-page">{{ page + 1 }}</span>
+        <button
+            class="pagination-button"
+            (click)="nextPage()"
+            [disabled]="(page + 1) * pageSize >= totalGroups"
+        >&raquo;
+        </button>
+    </div>
+</div>
+<router-outlet></router-outlet>

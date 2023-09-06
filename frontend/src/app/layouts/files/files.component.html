@@ -1,0 +1,71 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+   <nav>
+     <button routerLink="/dashboard">Tableau de bord</button>
+     <button routerLink="/files">Fichiers/Dossiers</button>
+     <button routerLink="/users">Collaborateurs</button>
+     <button routerLink="/groups">Groupes</button>
+     <button routerLink="/metadata">Métadonnées</button>
+   </nav>
+   <div class="header-card-container">
+    <div class="header-card">
+      <div class="fileExplorer-heading">
+        <h2 class="fullPath"><img src="../../../assets/folder.256x204.png" alt="" class="folder-icon-title" style="width:14px"> {{currentFolder?.fullPath}}</h2>
+        <div class="buttons">
+          <h3 *ngIf="currentFolder?.racine!==null" (click)="returnToRoot(currentFolder?.racine)" class="return-btn">Retour</h3>
+          <h3 class="return-btn" [routerLink]="['/files/upload', currentFolder?.id]">Charger</h3>
+          <h3 class="return-btn" [routerLink]="['/files/add-folder', currentFolder?.id]">+ Dossier</h3>
+        </div>
+      </div>
+      <div class="explorer">
+        <div *ngIf="currentFolder?.dossiers?.length==0 && currentFolder?.fichiers?.length==0" class="folder-empty">
+          <img src="../../../assets/high-priority.256x256.png" class="folder-icon" alt="">
+          <p>Le dossier est vide</p>
+        </div>
+        <div *ngFor="let folder of currentFolder?.dossiers" class="file-or-folder">
+          <div (click)="onFolderClick(folder)">
+            <img [src]="folder.groupRoot?'./../../assets/mind-map.250x256.png':'./../../assets/folder.256x204.png'" alt="" class="folder-icon">
+            <p>{{folder.nom}}</p>
+          </div>
+          <div class="file-button-collection">
+            <div class="settings-button">
+              <img class="settings-icon" src="../../../assets/services.240x256.png" alt="" (click)="openPopup(folder)">
+            </div>
+            <div class="settings-button">
+              <img class="settings-icon" src="../../../assets/full-trash.194x256.png" alt="" (click)="deletePopup(folder)">
+            </div>
+          </div>
+        </div>
+        <div *ngFor="let fichier of currentFolder?.fichiers" class="file-or-folder">
+          <!-- Code for displaying the files -->
+          <div (click)="onFileClick(fichier)">
+            <img [src]="'../../../assets/extensions/new/'+fichier.extension+'.png'" alt="" class="file-icon" class="folder-icon-title">
+            <p>{{(fichier.nom+"."+fichier.extension).slice(0,23)+((fichier.nom+"."+fichier.extension).length>=23?"...":"")}}</p>
+          </div>
+          <div class="file-button-collection">
+            <div class="settings-button">
+              <img class="settings-icon" src="../../../assets/apps.png" alt="" (click)="onDownload(fichier)">
+            </div>
+            <div class="settings-button">
+              <img class="settings-icon" src="../../../assets/services.240x256.png" alt="" [routerLink]="['/files/filedetails', fichier?.id]">
+            </div>
+            <div class="settings-button">
+              <img class="settings-icon" src="../../../assets/full-trash.194x256.png" alt="" (click)="deleteFilePopup(fichier)">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+<!-- Custum Modal -->
+<div class="popup" [class]="popupClass"  *ngIf="showModal">
+  <div class="modal-content">
+
+    <button (click)="hideModal()">fermer</button>
+    <!-- <button (click)="hideModal()">Supprimer</button> -->
+  </div>
+</div>
+<!-- <div class="overlay" *ngIf="showModal"></div> -->
+<router-outlet></router-outlet>
